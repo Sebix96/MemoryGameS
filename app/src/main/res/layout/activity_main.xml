@@ -10,7 +10,6 @@
         android:id="@+id/imageView"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
-
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="126dp"
@@ -27,6 +26,6 @@
         android:layout_marginStart="140dp"
         android:layout_marginTop="50dp"
         android:onClick="runGameActivity"
-        android:text="Button" />
+        android:text="Play" />
 
 </RelativeLayout>

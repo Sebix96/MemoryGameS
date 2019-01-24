@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity {
 
     ArrayList<String> patchList = new ArrayList<String>();
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +31,10 @@ public class GameActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-               
-
-                try {
-                File f = new File(patchList.get(0), "profile.jpg");
-                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                ImageView img = (ImageView) v;
-                img.setImageBitmap(b);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                loadImageFromStorage((String) patchList.get(i), v);
+                i++;
+                if (i > 3) {
+                    i = 0;
                 }
 
                 Toast.makeText(GameActivity.this, "" + id,
@@ -51,11 +47,11 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void loadImageFromStorage(String path) {
+    private void loadImageFromStorage(String path, View v) {
         try {
-            File f = new File(path, "profile.jpg");
+            File f = new File(path);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            ImageView img = (ImageView) findViewById(R.id.imageView);
+            ImageView img = (ImageView) v;
             img.setImageBitmap(b);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -63,8 +59,5 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void onClick(View view) {
-        loadImageFromStorage((String) patchList.get(0));
-    }
 
 }

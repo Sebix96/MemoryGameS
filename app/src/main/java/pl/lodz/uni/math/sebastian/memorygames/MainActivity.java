@@ -16,12 +16,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> patchList =new ArrayList<String>();
+    ArrayList<String> patchList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            String patch =saveToInternalStorage(imageBitmap);
+            String patch = saveToInternalStorage(imageBitmap);
             patchList.add(patch);
         }
     }
@@ -58,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath = new File(directory, "profile.jpg");
+        Date currentTime = Calendar.getInstance().getTime();
+        File mypath = new File(directory, currentTime.toString() + ".jpg");
 
         FileOutputStream fos = null;
         try {
@@ -74,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        return directory.getAbsolutePath();
+        return directory.getAbsolutePath() + "/" + currentTime.toString() + ".jpg";
     }
 
     private void loadImageFromStorage(String path) {
@@ -90,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onClick2(View view){
-        loadImageFromStorage((String) patchList.get(0));
-    }
 
     public void runGameActivity(View view) {
         Intent intent = new Intent(MainActivity.this, GameActivity.class);
