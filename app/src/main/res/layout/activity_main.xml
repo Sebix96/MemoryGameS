@@ -8,24 +8,36 @@
 
     <ImageButton
         android:id="@+id/imageView"
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="84dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="126dp"
         android:layout_marginTop="111dp"
         android:onClick="onClick"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="288dp"
         android:onClick="runGameActivity"
-        android:text="Play" />
+        android:text="Play"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="215dp"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="35dp"
+        android:text="Take four pictures."
+        android:textSize="24sp" />
 
 </RelativeLayout>

@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,12 +25,12 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> patchList = new ArrayList<String>();
+    int fotoCounter =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public void onClick(View view) {
@@ -51,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             String patch = saveToInternalStorage(imageBitmap);
             patchList.add(patch);
+            if(fotoCounter ==4)
+            {
+                View button = findViewById(R.id.button);
+                button.setVisibility(View.VISIBLE);
+                View fotoButton = findViewById(R.id.imageView);
+                fotoButton.setVisibility(View.GONE);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Take "+(4-fotoCounter)+" more pictures !", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -76,13 +88,14 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        fotoCounter++;
         return directory.getAbsolutePath() + "/" + currentTime.toString() + ".jpg";
     }
 
     private void loadImageFromStorage(String path) {
 
         try {
-            File f = new File(path, "profile.jpg");
+            File f = new File(path);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             ImageView img = (ImageView) findViewById(R.id.imageView);
             img.setImageBitmap(b);
