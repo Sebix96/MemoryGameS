@@ -30,9 +30,9 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         shuffleArray(Array);
+
         final GridView gridview = (GridView) findViewById(R.id.gridView);
         gridview.setAdapter(new ImageAdapter(this));
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 loadImageFromStorage((String) pathList.get(Array[(int) id]), v);
@@ -51,6 +51,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         pathList = bundle.getStringArrayList("message");
@@ -101,6 +102,5 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(GameActivity.this, MainActivity.class);
         startActivity(intent);
     }
-
 
 }

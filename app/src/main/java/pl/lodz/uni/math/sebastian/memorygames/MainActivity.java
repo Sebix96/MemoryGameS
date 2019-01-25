@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> pathList = new ArrayList<String>();
-    int picturesCounter =0;
+    int picturesCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +48,13 @@ public class MainActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             String path = saveToInternalStorage(imageBitmap);
             pathList.add(path);
-            if(picturesCounter ==4)
-            {
+            if (picturesCounter == 4) {
                 View buttonPlay = findViewById(R.id.buttonPlay);
                 buttonPlay.setVisibility(View.VISIBLE);
                 View pictureButton = findViewById(R.id.pictureButton);
                 pictureButton.setVisibility(View.GONE);
-            }
-            else{
-                Toast.makeText(MainActivity.this, "Take "+(4- picturesCounter)+" more pictures !", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Take " + (4 - picturesCounter) + " more pictures !", Toast.LENGTH_SHORT).show();
             }
         }
     }
