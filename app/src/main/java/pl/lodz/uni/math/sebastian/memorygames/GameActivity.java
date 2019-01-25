@@ -19,11 +19,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GameActivity extends AppCompatActivity {
 
-    ArrayList<String> pathList = new ArrayList<String>();
-    int[] Array = {0, 0, 1, 1, 2, 2, 3, 3};
-    int pointCounter=0;
-    long earlierId = 99;
-    View earlierView = null;
+    private ArrayList<String> pathList = new ArrayList<String>();
+    private int[] Array = {0, 0, 1, 1, 2, 2, 3, 3};
+    private int pointCounter=0;
+    private long earlierId = 99;
+    private View earlierView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,8 +19,9 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> pathList = new ArrayList<String>();
-    int picturesCounter = 0;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ArrayList<String> pathList = new ArrayList<String>();
+    private int picturesCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         dispatchTakePictureIntent();
     }
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -53,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 buttonPlay.setVisibility(View.VISIBLE);
                 View pictureButton = findViewById(R.id.pictureButton);
                 pictureButton.setVisibility(View.GONE);
+                View textView = findViewById(R.id.textView);
+                textView.setVisibility(View.GONE);
             } else {
                 Toast.makeText(MainActivity.this, "Take " + (4 - picturesCounter) + " more pictures !", Toast.LENGTH_SHORT).show();
             }

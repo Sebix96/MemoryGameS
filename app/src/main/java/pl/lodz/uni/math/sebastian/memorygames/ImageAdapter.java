@@ -10,7 +10,7 @@ public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    public ImageAdapter(Context c) {
+    ImageAdapter(Context c) {
         mContext = c;
     }
 
