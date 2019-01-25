@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,8 +21,9 @@ public class GameActivity extends AppCompatActivity {
     ArrayList<String> patchList = new ArrayList<String>();
     int[] Array = {0, 0, 1, 1, 2, 2, 3, 3};
     long earlierId = 99;
-    View earlierView=null;
-
+    View earlierView = null;
+    long earlierEarlierId = 99;
+    View earlierEarlierView = null;
 
 
     @Override
@@ -38,29 +38,20 @@ public class GameActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                if(id!=earlierId){
+
+                if (id != earlierId && id != earlierEarlierId) {
                     loadImageFromStorage((String) patchList.get(Array[(int) id]), v);
-                    if (earlierId != 99) {
-                        if (Array[(int) earlierId] == Array[(int) id]) {
-                            ImageView img = (ImageView) v;
-                            img.setVisibility(View.GONE);
-                            img = (ImageView) earlierView;
-                            img.setVisibility(View.GONE);
+                    if (earlierEarlierId != 99) {
+                        if (earlierId != 99) {
+                            comparisonView(v,id);
+                        } else {
                             earlierId = id;
                             earlierView = v;
-                        } else {
-                            ImageView img = (ImageView) v;
-                            img.setImageDrawable(getDrawable(R.drawable.sample_0));
-                            img = (ImageView) earlierView;
-                            img.setImageDrawable(getDrawable(R.drawable.sample_0));
-                            earlierId = 99;
-                            earlierView = null;
                         }
                     }
-                    else
-                    {
-                        earlierId = id;
-                        earlierView = v;
+                    else{
+                        earlierEarlierView = v;
+                        earlierEarlierId = id;
                     }
 
                 }
@@ -85,6 +76,25 @@ public class GameActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void comparisonView(View v, long id) {
+        if (Array[(int) earlierId] == Array[(int) earlierEarlierId]) {
+            ImageView img = (ImageView) earlierEarlierView;
+            img.setVisibility(View.GONE);
+            img = (ImageView) earlierView;
+            img.setVisibility(View.GONE);
+        } else {
+            ImageView img = (ImageView) earlierEarlierView;
+            img.setImageDrawable(getDrawable(R.drawable.sample_0));
+            img = (ImageView) earlierView;
+            img.setImageDrawable(getDrawable(R.drawable.sample_0));
+        }
+        earlierId = 99;
+        earlierView = null;
+        earlierEarlierView = v;
+        earlierEarlierId = id;
 
     }
 
