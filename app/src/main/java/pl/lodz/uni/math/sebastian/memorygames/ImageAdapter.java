@@ -47,7 +47,7 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.sample_0, R.drawable.sample_0,
             R.drawable.sample_0, R.drawable.sample_0,
             R.drawable.sample_0, R.drawable.sample_0,
-            R.drawable.sample_0, R.drawable.sample_0,
+            R.drawable.sample_0, R.drawable.sample_0
 
     };
 }
