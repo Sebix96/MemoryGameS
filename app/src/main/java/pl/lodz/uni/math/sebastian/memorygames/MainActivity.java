@@ -4,17 +4,13 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,8 +20,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> patchList = new ArrayList<String>();
-    int fotoCounter =0;
+    ArrayList<String> pathList = new ArrayList<String>();
+    int picturesCounter =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +47,17 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            String patch = saveToInternalStorage(imageBitmap);
-            patchList.add(patch);
-            if(fotoCounter ==4)
+            String path = saveToInternalStorage(imageBitmap);
+            pathList.add(path);
+            if(picturesCounter ==4)
             {
-                View button = findViewById(R.id.button);
-                button.setVisibility(View.VISIBLE);
-                View fotoButton = findViewById(R.id.imageView);
-                fotoButton.setVisibility(View.GONE);
+                View buttonPlay = findViewById(R.id.buttonPlay);
+                buttonPlay.setVisibility(View.VISIBLE);
+                View pictureButton = findViewById(R.id.pictureButton);
+                pictureButton.setVisibility(View.GONE);
             }
             else{
-                Toast.makeText(MainActivity.this, "Take "+(4-fotoCounter)+" more pictures !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Take "+(4- picturesCounter)+" more pictures !", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -88,29 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        fotoCounter++;
+        picturesCounter++;
         return directory.getAbsolutePath() + "/" + currentTime.toString() + ".jpg";
     }
 
-    private void loadImageFromStorage(String path) {
-
-        try {
-            File f = new File(path);
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            ImageView img = (ImageView) findViewById(R.id.imageView);
-            img.setImageBitmap(b);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
     public void runGameActivity(View view) {
         Intent intent = new Intent(MainActivity.this, GameActivity.class);
-        intent.putExtra("message", patchList);
+        intent.putExtra("message", pathList);
         startActivity(intent);
     }
-
 
 }

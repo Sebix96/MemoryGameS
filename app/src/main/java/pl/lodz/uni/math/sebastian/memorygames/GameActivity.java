@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GameActivity extends AppCompatActivity {
 
-    ArrayList<String> patchList = new ArrayList<String>();
+    ArrayList<String> pathList = new ArrayList<String>();
     int[] Array = {0, 0, 1, 1, 2, 2, 3, 3};
     int pointCounter=0;
     long earlierId = 99;
@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                loadImageFromStorage((String) patchList.get(Array[(int) id]), v);
+                loadImageFromStorage((String) pathList.get(Array[(int) id]), v);
                 if (id != earlierId) {
                     if (earlierId != 99) {
                         comparisonView(v, id);
@@ -45,15 +45,15 @@ public class GameActivity extends AppCompatActivity {
                     }
                 }
                 if(pointCounter==4){
-                Toast.makeText(GameActivity.this, "End Game", Toast.LENGTH_SHORT).show();
-                    View button = findViewById(R.id.button2);
+                    Toast.makeText(GameActivity.this, "End Game", Toast.LENGTH_SHORT).show();
+                    View button = findViewById(R.id.buttonPlayAgain);
                     button.setVisibility(View.VISIBLE);
                 }
             }
         });
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        patchList = bundle.getStringArrayList("message");
+        pathList = bundle.getStringArrayList("message");
     }
 
     private void loadImageFromStorage(String path, View v) {
